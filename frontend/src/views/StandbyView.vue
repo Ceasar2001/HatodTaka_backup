@@ -1,5 +1,6 @@
 <template>
-    <div class="pt-16">
+    <div class="pt-16 mt-5">
+        <Navbar />
         <h1 class="text-3xl font-semibold mb-4">{{ title }}</h1>
         <div v-if="!trip.id" class="mt-8 flex justify-center">
             <Loader />
@@ -31,6 +32,7 @@
 <script setup>
 import { ref } from 'vue'
 import Loader from '@/components/Loader.vue'
+import Navbar from '@/components/Navbar.vue'
 import { onMounted } from 'vue'
 import Echo from 'laravel-echo'
 //import Pusher from 'pusher-js'

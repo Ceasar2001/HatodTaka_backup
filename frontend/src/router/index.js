@@ -7,6 +7,7 @@ import TripView from '@/views/TripView.vue'
 import DriverView from '@/views/DriverView.vue'
 import StandbyView from '@/views/StandbyView.vue'
 import DrivingView from '@/views/DrivingView.vue'
+import DriverProfile from '@/components/DriverProfile.vue';
 import axios from 'axios'
 import { isEqual } from 'fast-deep-equal';
 
@@ -52,7 +53,11 @@ const router = createRouter({
       path: '/driving',
       name: 'driving',
       component: DrivingView
-    }
+    },
+    { path: '/driver-info', 
+      name: 'driver-info',
+      component: DriverProfile 
+    },
   ]
 })
 

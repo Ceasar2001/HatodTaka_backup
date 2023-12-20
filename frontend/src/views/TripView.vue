@@ -8,7 +8,7 @@
                         <GMapMap :zoom="14" :center="location.current.geometry" ref="gMap"
                             style="width:100%; height: 256px;">
                             <GMapMarker :position="location.current.geometry" :icon="currentIcon" />
-                            <GMapMarker :position="trip.driver_location" :icon="driverIcon" />
+                            <GMapMarker :position="trip.driver_location"  :icon="driverIcon"/>
                         </GMapMap>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 <script setup>
 import { useLocationStore } from '@/stores/location'
 import { useTripStore } from '@/stores/trip'
-import { routeLocationKey, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
@@ -58,6 +58,9 @@ const updateMapBounds = () => {
     let originPoint = new google.maps.LatLng(location.current.geometry),
         driverPoint = new google.maps.LatLng(trip.driver_location),
         latLngBounds = new google.maps.LatLngBounds()
+        
+    console.log('originPoint:', originPoint);
+    console.log('driverPoint:', driverPoint);
 
     latLngBounds.extend(originPoint)
     latLngBounds.extend(driverPoint)
@@ -68,6 +71,9 @@ const updateMapBounds = () => {
 
 //method
 onMounted(() => {
+    gMap.value.$mapPromise.then((mapObject) => {
+        gMapObject.value = mapObject
+    })
     let echo = new Echo({
         broadcaster: 'pusher',
         key: 'mykey',
